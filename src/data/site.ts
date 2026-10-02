@@ -131,9 +131,6 @@ export const plans = [
   {
     id: "essential",
     name: "Essential Clean",
-    oneTime: "150",
-    monthly: "520",
-    unit: "QAR",
     blurb: "Standard home cleaning to keep things calm week to week.",
     features: [
       "Living areas, bedrooms & floors",
@@ -146,9 +143,6 @@ export const plans = [
   {
     id: "deep",
     name: "Deep Clean",
-    oneTime: "350",
-    monthly: "1,150",
-    unit: "QAR",
     blurb: "The full reset — detailed scrub with steam and extraction.",
     features: [
       "Everything in Essential",
@@ -162,9 +156,6 @@ export const plans = [
   {
     id: "move",
     name: "Move-In / Move-Out",
-    oneTime: "500",
-    monthly: "—",
-    unit: "QAR",
     blurb: "Handover-ready property cleaning, top to bottom.",
     features: [
       "Full empty-property deep clean",
@@ -177,9 +168,6 @@ export const plans = [
   {
     id: "office",
     name: "Office & Commercial",
-    oneTime: "Custom",
-    monthly: "Custom",
-    unit: "",
     blurb: "Tailored contracts for offices, clinics and retail spaces.",
     features: [
       "Daily, weekly or monthly visits",
