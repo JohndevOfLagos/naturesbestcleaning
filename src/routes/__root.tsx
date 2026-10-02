@@ -78,11 +78,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Nature's Best Cleaning | Professional Cleaning in Doha, Qatar" },
+      {
+        name: "description",
+        content:
+          "Premium home, deep, move-in/out and office cleaning in Al Muntaza, Doha. Vetted cleaners, transparent quotes, satisfaction guaranteed.",
+      },
+      {
+        property: "og:title",
+        content: "Nature's Best Cleaning | Professional Cleaning in Doha, Qatar",
+      },
+      {
+        property: "og:description",
+        content:
+          "Premium home, deep, move-in/out and office cleaning in Al Muntaza, Doha. Vetted cleaners, transparent quotes, satisfaction guaranteed.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
