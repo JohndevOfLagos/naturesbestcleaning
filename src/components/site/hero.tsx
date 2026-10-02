@@ -1,10 +1,10 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Leaf, MessageCircle, Sparkles, Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { company, trustChips } from "@/data/site";
 import { useQuote } from "./quote-context";
-import heroTeam from "@/assets/hero-team.jpg";
+import heroTeam from "@/assets/aEQWE.jpg";
 
 const leaves = [
   { left: "6%", delay: 0, size: 22, duration: 19 },
@@ -17,10 +17,16 @@ const leaves = [
 
 export function Hero() {
   const { requestQuote } = useQuote();
+  const { scrollY } = useScroll();
+  const backgroundY = useTransform(scrollY, [0, 700], [0, 90]);
 
   return (
     <section id="home" className="hero-surface relative overflow-hidden pt-28 pb-20 sm:pt-32">
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      <motion.div
+        aria-hidden
+        style={{ y: backgroundY }}
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
         {leaves.map((leaf, i) => (
           <Leaf
             key={i}
@@ -39,7 +45,7 @@ export function Hero() {
           className="absolute top-1/2 left-[8%] size-4 text-gold/60 animate-shimmer"
           style={{ animationDelay: "1.2s" }}
         />
-      </div>
+      </motion.div>
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-8">
         <motion.div
@@ -64,6 +70,9 @@ export function Hero() {
 
           <p className="mt-6 max-w-xl text-base text-primary-foreground/80 sm:text-lg">
             Professional cleaning • Quality service • Fresh results across Doha.
+          </p>
+          <p className="mt-3 font-display text-base italic text-primary-foreground/70">
+            {company.clearMindLine}
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

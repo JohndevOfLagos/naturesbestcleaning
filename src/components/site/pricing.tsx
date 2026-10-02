@@ -76,7 +76,9 @@ export function Pricing() {
                         <span className="text-xs font-semibold uppercase tracking-widest text-gold">
                           from {plan.unit}
                         </span>
-                        <span className="font-display text-4xl leading-none text-navy">{price}</span>
+                        <span className="font-display text-4xl leading-none text-navy">
+                          {price}
+                        </span>
                       </>
                     ) : (
                       <span className="font-display text-3xl leading-none text-navy">{price}</span>
@@ -98,7 +100,7 @@ export function Pricing() {
                     variant={plan.popular ? "gold" : "navyOutline"}
                     size="pill"
                     className="mt-7 w-full"
-                    onClick={() => requestQuote({ plan: plan.name })}
+                    onClick={() => requestQuote({ plan: plan.name, service: plan.service })}
                   >
                     Get This Plan
                   </Button>

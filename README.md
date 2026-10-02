@@ -20,5 +20,19 @@ Prefer working locally? You need Node.js and npm — [install with nvm](https://
 git clone <this-repository-url>
 cd <repository-name>
 npm i
-npm run dev
+npm run build
+npm run preview -- --port 3001
 ```
+
+The preview command serves the Cloudflare worker build and its static assets locally. Set `PORT` or pass `--port` to choose a different port.
+
+## Quote Delivery
+
+Configure these server-side environment variables before accepting live enquiries:
+
+- `COMPANY_EMAIL`: inbox that receives quote requests.
+- `RESEND_API_KEY`: Resend API key.
+- `RESEND_FROM_EMAIL`: verified Resend sender, for example `Nature's Best Cleaning <quotes@your-verified-domain>`.
+- `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`: server-only credentials used to save quote requests. Apply the quote requests migration before launch.
+
+Never expose the Resend API key or Supabase service-role key through a `VITE_` variable.

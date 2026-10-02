@@ -27,7 +27,7 @@ export function Navbar() {
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Logo light={!scrolled} compact />
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
@@ -44,7 +44,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <a
             href={company.phoneHref}
             className={`flex items-center gap-2 text-sm font-medium transition-colors ${
@@ -64,18 +64,20 @@ export function Navbar() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className={`rounded-full p-2 transition-colors lg:hidden ${
+          className={`rounded-full p-2 transition-colors xl:hidden ${
             scrolled ? "text-navy" : "text-primary-foreground"
           }`}
         >
-          {open ? <Menu className="size-6 rotate-90" /> : <Menu className="size-6" />}
+          {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </nav>
 
       {open ? (
-        <div className="glass-panel border-t lg:hidden">
+        <div className="glass-panel border-t xl:hidden">
           <div className="flex items-center justify-between px-5 pt-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-gold">Menu</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-gold">
+              Menu
+            </span>
             <button
               type="button"
               aria-label="Close menu"

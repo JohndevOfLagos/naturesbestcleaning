@@ -5,7 +5,7 @@ import { Reveal, SectionHeading } from "./reveal";
 import before from "@/assets/before-kitchen.jpg";
 import after from "@/assets/after-kitchen.jpg";
 import bathroom from "@/assets/gallery-bathroom.jpg";
-import team from "@/assets/hero-team.jpg";
+import team from "@/assets/aEQWE.jpg";
 
 const grid = [
   { src: bathroom, alt: "Polished marble bathroom after a deep clean in Doha" },

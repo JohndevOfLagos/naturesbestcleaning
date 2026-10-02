@@ -8,6 +8,7 @@ export const company = {
   shortName: "Nature's Best",
   tagline: "We don't just clean. We make your space exhale.",
   subline: "Luxury cleaning, thoughtfully done.",
+  clearMindLine: "A clean space. A clear mind. A better life.",
   motto: "Clean spaces. Happy places. Better living.",
   location: "Al Muntaza, Doha, Qatar",
   website: "Naturesbestcompany.com",
@@ -18,8 +19,7 @@ export const company = {
   whatsappUrl:
     "https://wa.me/97450793043?text=Hello%20Nature's%20Best%20Cleaning%2C%20I'd%20like%20to%20get%20a%20quote.",
   workingHours: "Saturday – Thursday, 7:00 AM – 9:00 PM (Friday by appointment)",
-  mapEmbed:
-    "https://www.google.com/maps?q=Al%20Muntazah%2C%20Doha%2C%20Qatar&output=embed",
+  mapEmbed: "https://www.google.com/maps?q=Al%20Muntazah%2C%20Doha%2C%20Qatar&output=embed",
   socials: [
     { label: "Facebook", href: "#" },
     { label: "Instagram", href: "#" },
@@ -131,6 +131,7 @@ export const plans = [
   {
     id: "essential",
     name: "Essential Clean",
+    service: "Home Cleaning",
     oneTime: "150",
     monthly: "520",
     unit: "QAR",
@@ -146,6 +147,7 @@ export const plans = [
   {
     id: "deep",
     name: "Deep Clean",
+    service: "Deep Cleaning",
     oneTime: "350",
     monthly: "1,150",
     unit: "QAR",
@@ -162,6 +164,7 @@ export const plans = [
   {
     id: "move",
     name: "Move-In / Move-Out",
+    service: "Move-In / Move-Out",
     oneTime: "500",
     monthly: "—",
     unit: "QAR",
@@ -177,6 +180,7 @@ export const plans = [
   {
     id: "office",
     name: "Office & Commercial",
+    service: "Office Cleaning",
     oneTime: "Custom",
     monthly: "Custom",
     unit: "",
@@ -245,8 +249,7 @@ export const testimonials = [
   {
     name: "Grace O.",
     role: "Villa, Al Muntaza",
-    quote:
-      "The deep clean was worth every riyal. The house smelled fresh for weeks afterwards.",
+    quote: "The deep clean was worth every riyal. The house smelled fresh for weeks afterwards.",
     rating: 5,
   },
 ] as const;
@@ -285,3 +288,39 @@ export const faqs = [
     a: "Tell us within 24 hours and we return to put it right at no extra cost. That's our satisfaction guarantee.",
   },
 ] as const;
+
+export const chatContent = {
+  welcome: "Hi! Welcome to Nature's Best Cleaning. How can I help you today?",
+  quickReplies: [
+    "Our Services",
+    "Pricing",
+    "Get a Quote",
+    "Book a Cleaning",
+    "Contact Us",
+    "Talk to a Human",
+  ],
+  answers: {
+    services:
+      "We offer home cleaning, detailed deep cleans, move-in / move-out cleaning, and office cleaning across Doha. Tell me which service you need, or I can help you request a quote.",
+    pricing:
+      "Home cleaning starts from QAR 150, deep cleaning from QAR 350, and move-in / move-out cleaning from QAR 500. Office cleaning is quoted to fit your space. Share a few details for an exact quote.",
+    areas:
+      "We cover Doha and nearby areas, including Al Muntaza, Al Sadd, Al Waab, West Bay, The Pearl, Lusail and Ain Khaled. Send your area and we can confirm availability.",
+    hours: `Our usual hours are ${company.workingHours}. Same-day visits depend on team availability. Tell me your preferred day and I can start a quote.`,
+    booking:
+      "24 hours' notice is ideal, and same-day appointments are often available. We confirm your slot and arrival window before the team heads over. Would you like to request a quote?",
+    payment:
+      "You can pay by cash, bank transfer or major cards after the clean. Commercial clients can be invoiced monthly. I can help you book whenever you're ready.",
+    default:
+      "I can help with services, pricing, Doha coverage, hours, booking or payment. You can also request a quote here, or talk to our team on WhatsApp.",
+  },
+  quotePrompts: {
+    name: "Let's get a quote started. What's your full name?",
+    phone: "Thanks. What's the best phone or WhatsApp number to reach you?",
+    service:
+      "Which service do you need: Home Cleaning, Deep Cleaning, Move-In / Move-Out, or Office Cleaning?",
+    date: "And what date would you prefer? You can also say you're flexible.",
+    success: "Thank you! Your quote request is with our team. We'll reach out shortly.",
+    error: "I couldn't submit that just now. Please WhatsApp our team and we'll help you directly.",
+  },
+} as const;

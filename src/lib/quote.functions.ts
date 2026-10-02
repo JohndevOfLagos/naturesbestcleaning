@@ -3,11 +3,7 @@ import { z } from "zod";
 
 export const quoteSchema = z.object({
   fullName: z.string().trim().min(2, "Please enter your full name").max(80),
-  phone: z
-    .string()
-    .trim()
-    .min(6, "Please enter a valid phone or WhatsApp number")
-    .max(30),
+  phone: z.string().trim().min(6, "Please enter a valid phone or WhatsApp number").max(30),
   email: z.union([z.string().trim().email("Please enter a valid email"), z.literal("")]).optional(),
   service: z.string().trim().max(60).optional(),
   plan: z.string().trim().max(60).optional(),
@@ -21,11 +17,7 @@ export const quoteSchema = z.object({
 export type QuoteInput = z.infer<typeof quoteSchema>;
 
 const esc = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const row = (label: string, value?: string) =>
   value && value.trim()
@@ -49,7 +41,7 @@ function rateLimited(key: string) {
 }
 
 export const submitQuote = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => quoteSchema.parse(data))
+  .validator((data: unknown) => quoteSchema.parse(data))
   .handler(async ({ data, request }) => {
     if (data.honeypot) return { ok: true as const, emailSent: false };
 
@@ -63,9 +55,11 @@ export const submitQuote = createServerFn({ method: "POST" })
 
     const companyEmail = process.env["COMPANY_EMAIL"];
     const resendKey = process.env["RESEND_API_KEY"];
+    const resendFromEmail = process.env["RESEND_FROM_EMAIL"];
 
     let emailSent = false;
-    if (companyEmail && resendKey) {
+    let databaseSaved = false;
+    if (companyEmail && resendKey && resendFromEmail) {
       const html = `
         <div style="background:#FBF7EE;padding:28px;font-family:Inter,Helvetica,Arial,sans-serif">
           <div style="max-width:620px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #eadfc6">
@@ -102,7 +96,7 @@ export const submitQuote = createServerFn({ method: "POST" })
 
       try {
         const res = await send({
-          from: "Nature's Best Cleaning <onboarding@resend.dev>",
+          from: resendFromEmail,
           to: [companyEmail],
           subject: `New cleaning enquiry — ${data.fullName}`,
           html,
@@ -113,7 +107,7 @@ export const submitQuote = createServerFn({ method: "POST" })
 
         if (res.ok && data.email) {
           await send({
-            from: "Nature's Best Cleaning <onboarding@resend.dev>",
+            from: resendFromEmail,
             to: [data.email],
             subject: "Thank you — we've received your request",
             html: `<div style="font-family:Inter,Helvetica,Arial,sans-serif;color:#0B1F4B;padding:24px">
@@ -145,10 +139,20 @@ export const submitQuote = createServerFn({ method: "POST" })
         source: data.source || "website",
         email_sent: emailSent,
       });
-      if (error) console.error("Lead save failed", error);
+      if (error) {
+        console.error("Lead save failed", error);
+      } else {
+        databaseSaved = true;
+      }
     } catch (error) {
       console.error("Lead save failed", error);
     }
 
-    return { ok: true as const, emailSent };
+    if (!emailSent || !databaseSaved) {
+      throw new Error(
+        "We couldn't complete your request right now. Please contact us on WhatsApp instead.",
+      );
+    }
+
+    return { ok: true as const, emailSent, databaseSaved };
   });

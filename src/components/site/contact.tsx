@@ -5,26 +5,37 @@ import { useServerFn } from "@tanstack/react-start";
 import { motion } from "motion/react";
 import {
   CheckCircle2,
+  Facebook,
   Globe,
+  Instagram,
   Loader2,
   MapPin,
   MessageCircle,
+  Music2,
   Phone,
   Send,
   TriangleAlert,
+  Youtube,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { company, propertyTypes, serviceOptions } from "@/data/site";
+import { company, plans, propertyTypes, serviceOptions } from "@/data/site";
 import { quoteSchema, submitQuote, type QuoteInput } from "@/lib/quote.functions";
 import { Reveal, SectionHeading } from "./reveal";
 import { useQuote } from "./quote-context";
 
 const selectClass =
   "h-10 w-full rounded-md border border-input bg-card px-3 text-sm text-foreground shadow-sm transition-colors focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none";
+
+const socialIcons = {
+  Facebook,
+  Instagram,
+  YouTube: Youtube,
+  TikTok: Music2,
+} as const;
 
 export function Contact() {
   const { prefill } = useQuote();
@@ -55,7 +66,9 @@ export function Contact() {
     if (prefill.plan) {
       setValue("plan", prefill.plan);
       if (!prefill.service) {
-        const match = serviceOptions.find((option) => prefill.plan?.includes(option.split(" ")[0]!));
+        const match = serviceOptions.find((option) =>
+          prefill.plan?.includes(option.split(" ")[0]!),
+        );
         if (match) setValue("service", match);
       }
     }
@@ -112,7 +125,11 @@ export function Contact() {
                   </div>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-5 sm:grid-cols-2">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  noValidate
+                  className="grid gap-5 sm:grid-cols-2"
+                >
                   <input
                     type="text"
                     tabIndex={-1}
@@ -124,7 +141,12 @@ export function Contact() {
 
                   <div className="sm:col-span-1">
                     <Label htmlFor="fullName">Full name *</Label>
-                    <Input id="fullName" className="mt-2" placeholder="Your name" {...register("fullName")} />
+                    <Input
+                      id="fullName"
+                      className="mt-2"
+                      placeholder="Your name"
+                      {...register("fullName")}
+                    />
                     {formState.errors.fullName ? (
                       <p className="mt-1.5 text-xs text-destructive">
                         {formState.errors.fullName.message}
@@ -192,9 +214,26 @@ export function Contact() {
                     </select>
                   </div>
 
+                  <div>
+                    <Label htmlFor="plan">Plan (optional)</Label>
+                    <select id="plan" className={`mt-2 ${selectClass}`} {...register("plan")}>
+                      <option value="">Choose a plan</option>
+                      {plans.map((plan) => (
+                        <option key={plan.id} value={plan.name}>
+                          {plan.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
                   <div className="sm:col-span-2">
                     <Label htmlFor="preferredDate">Preferred date</Label>
-                    <Input id="preferredDate" type="date" className="mt-2" {...register("preferredDate")} />
+                    <Input
+                      id="preferredDate"
+                      type="date"
+                      className="mt-2"
+                      {...register("preferredDate")}
+                    />
                   </div>
 
                   <div className="sm:col-span-2">
@@ -270,7 +309,9 @@ export function Contact() {
                       <MessageCircle className="size-4" />
                     </span>
                     <span>
-                      <span className="block text-xs uppercase tracking-[0.2em] text-gold">WhatsApp</span>
+                      <span className="block text-xs uppercase tracking-[0.2em] text-gold">
+                        WhatsApp
+                      </span>
                       {company.whatsapp}
                     </span>
                   </a>
@@ -284,7 +325,9 @@ export function Contact() {
                       <Phone className="size-4" />
                     </span>
                     <span>
-                      <span className="block text-xs uppercase tracking-[0.2em] text-gold">Call us</span>
+                      <span className="block text-xs uppercase tracking-[0.2em] text-gold">
+                        Call us
+                      </span>
                       {company.phone}
                     </span>
                   </a>
@@ -294,7 +337,9 @@ export function Contact() {
                     <MapPin className="size-4" />
                   </span>
                   <span>
-                    <span className="block text-xs uppercase tracking-[0.2em] text-gold">Location</span>
+                    <span className="block text-xs uppercase tracking-[0.2em] text-gold">
+                      Location
+                    </span>
                     {company.location}
                   </span>
                 </li>
@@ -309,7 +354,9 @@ export function Contact() {
                       <Globe className="size-4" />
                     </span>
                     <span>
-                      <span className="block text-xs uppercase tracking-[0.2em] text-gold">Website</span>
+                      <span className="block text-xs uppercase tracking-[0.2em] text-gold">
+                        Website
+                      </span>
                       {company.website}
                     </span>
                   </a>
@@ -319,16 +366,20 @@ export function Contact() {
               <div className="hairline" />
 
               <div className="flex flex-wrap gap-2">
-                {company.socials.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={`${company.name} on ${social.label}`}
-                    className="rounded-full border border-gold/35 px-4 py-1.5 text-xs font-medium text-primary-foreground/80 transition-colors hover:border-gold hover:text-gold"
-                  >
-                    {social.label}
-                  </a>
-                ))}
+                {company.socials.map((social) => {
+                  const Icon = socialIcons[social.label as keyof typeof socialIcons];
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      aria-label={`${company.name} on ${social.label}`}
+                      title={social.label}
+                      className="flex size-10 items-center justify-center rounded-full border border-gold/35 text-primary-foreground/80 transition-colors hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    >
+                      <Icon className="size-4" aria-hidden="true" />
+                    </a>
+                  );
+                })}
               </div>
 
               <div className="mt-auto overflow-hidden rounded-2xl border border-gold/25">
