@@ -50,9 +50,10 @@ function rateLimited(key: string) {
 
 export const submitQuote = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => quoteSchema.parse(data))
-  .handler(async ({ data, request }) => {
+  .handler(async ({ data }) => {
     if (data.honeypot) return { ok: true as const, emailSent: false };
 
+    const request = getRequest();
     const ip =
       request?.headers.get("cf-connecting-ip") ??
       request?.headers.get("x-forwarded-for") ??
