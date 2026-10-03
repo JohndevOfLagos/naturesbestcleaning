@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { Leaf, MessageCircle, Sparkles, Star } from "lucide-react";
+import { Leaf, Sparkles, Star } from "lucide-react";
+import WhatsappIconIcon from "@iconify-react/logos/whatsapp-icon";
 
 import { Button } from "@/components/ui/button";
 import { company, trustChips } from "@/data/site";
@@ -81,7 +82,7 @@ export function Hero() {
             </Button>
             <Button variant="whatsapp" size="xl" asChild>
               <a href={company.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="size-5" />
+                <WhatsappIconIcon height="1em" />
                 Chat on WhatsApp
               </a>
             </Button>

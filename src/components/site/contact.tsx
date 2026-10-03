@@ -10,13 +10,13 @@ import {
   Instagram,
   Loader2,
   MapPin,
-  MessageCircle,
   Music2,
   Phone,
   Send,
   TriangleAlert,
   Youtube,
 } from "lucide-react";
+import WhatsappIconIcon from "@iconify-react/logos/whatsapp-icon";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -115,7 +115,7 @@ export function Contact() {
                   <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                     <Button variant="whatsapp" size="pill" asChild>
                       <a href={company.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="size-4" />
+                        <WhatsappIconIcon height="1em" />
                         Chat on WhatsApp
                       </a>
                     </Button>
@@ -306,7 +306,7 @@ export function Contact() {
                     className="flex items-center gap-3 text-sm text-primary-foreground/85 transition-colors hover:text-gold"
                   >
                     <span className="flex size-10 items-center justify-center rounded-xl border border-gold/35 text-gold">
-                      <MessageCircle className="size-4" />
+                      <WhatsappIconIcon height="1em" />
                     </span>
                     <span>
                       <span className="block text-xs uppercase tracking-[0.2em] text-gold">

@@ -20,17 +20,20 @@ import { company } from "@/data/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${company.name} | Luxury Cleaning in Doha` },
+      { title: "Nature's Best Cleaning | Professional Cleaning in Doha, Qatar" },
       {
         name: "description",
         content:
-          "Thoughtful home, deep, move-in and office cleaning across Doha. Professional teams, fresh results and clear quotes from Nature's Best Cleaning Company.",
+          "Premium home, deep, move-in/out and office cleaning in Al Muntaza, Doha. Vetted cleaners, transparent quotes, satisfaction guaranteed. Get your free quote today.",
       },
-      { property: "og:title", content: `${company.name} | Doha, Qatar` },
+      {
+        property: "og:title",
+        content: "Nature's Best Cleaning | Professional Cleaning in Doha, Qatar",
+      },
       {
         property: "og:description",
         content:
-          "We don't just clean. We make your space exhale. Get a free cleaning quote in Doha.",
+          "Premium home, deep, move-in/out and office cleaning in Al Muntaza, Doha. Vetted cleaners, transparent quotes, satisfaction guaranteed.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -68,7 +71,7 @@ function Index() {
 
   return (
     <QuoteProvider>
-      <div className="min-h-screen overflow-x-clip pb-[calc(4.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+  <div className="min-h-screen overflow-x-clip bg-background pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-foreground lg:pb-0">
         <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>
         <Navbar />
         <main>

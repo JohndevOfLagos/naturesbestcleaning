@@ -1,4 +1,5 @@
-import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import WhatsappIconIcon from "@iconify-react/logos/whatsapp-icon";
 
 import { company, navLinks } from "@/data/site";
 import { Logo } from "./logo";
@@ -54,7 +55,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 transition-colors hover:text-gold"
                 >
-                  <MessageCircle className="size-4 text-gold" />
+                  <WhatsappIconIcon height="1em" />
                   {company.whatsapp}
                 </a>
               </li>

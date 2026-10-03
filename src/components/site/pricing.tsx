@@ -1,13 +1,18 @@
-import { useState } from "react";
 import { Check } from "lucide-react";
+import WhatsappIconIcon from "@iconify-react/logos/whatsapp-icon";
 
 import { Button } from "@/components/ui/button";
-import { plans, pricingNote } from "@/data/site";
+import { company, plans, pricingNote } from "@/data/site";
 import { Reveal, SectionHeading } from "./reveal";
 import { useQuote } from "./quote-context";
 
+function whatsappQuoteLink(planName: string) {
+  const url = new URL(company.whatsappUrl);
+  url.searchParams.set("text", `Hi, I'd like a quote for ${planName} cleaning service`);
+  return url.toString();
+}
+
 export function Pricing() {
-  const [monthly, setMonthly] = useState(false);
   const { requestQuote } = useQuote();
 
   return (
@@ -16,42 +21,11 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Pricing"
           title="Clear prices, no surprises"
-          subtitle="Starting points in QAR. Your exact quote arrives within minutes of enquiring."
+          subtitle="Tell us your location and what you need — we reply fast with a clear, fixed price."
         />
-
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex justify-center">
-            <div
-              role="group"
-              aria-label="Billing type"
-              className="inline-flex rounded-full border border-gold/40 bg-card p-1 shadow-soft"
-            >
-              {[
-                { label: "One-time", value: false },
-                { label: "Monthly plan", value: true },
-              ].map((option) => (
-                <button
-                  key={option.label}
-                  type="button"
-                  aria-pressed={monthly === option.value}
-                  onClick={() => setMonthly(option.value)}
-                  className={`rounded-full px-5 py-2 text-sm font-medium transition-colors duration-300 ${
-                    monthly === option.value
-                      ? "bg-navy text-primary-foreground"
-                      : "text-navy hover:text-gold"
-                  }`}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {plans.map((plan, i) => {
-            const price = monthly ? plan.monthly : plan.oneTime;
-            const isNumeric = /^[\d,]/.test(price);
             return (
               <Reveal key={plan.id} delay={i * 0.08}>
                 <article
@@ -70,20 +44,20 @@ export function Pricing() {
                   <h3 className="text-xl text-navy">{plan.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{plan.blurb}</p>
 
-                  <p className="mt-6 flex items-end gap-1.5">
-                    {isNumeric ? (
-                      <>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-gold">
-                          from {plan.unit}
-                        </span>
-                        <span className="font-display text-4xl leading-none text-navy">
-                          {price}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="font-display text-3xl leading-none text-navy">{price}</span>
-                    )}
+                  <p className="mt-6 text-sm font-medium leading-relaxed text-navy">
+                    Price varies by location — Get your free quote
                   </p>
+
+                  <Button asChild variant="whatsapp" size="pill" className="mt-4 w-full">
+                    <a
+                      href={whatsappQuoteLink(plan.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <WhatsappIconIcon height="1em" />
+                      Get a Free Quote
+                    </a>
+                  </Button>
 
                   <div className="hairline my-6" />
 

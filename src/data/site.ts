@@ -10,21 +10,21 @@ export const company = {
   subline: "Luxury cleaning, thoughtfully done.",
   clearMindLine: "A clean space. A clear mind. A better life.",
   motto: "Clean spaces. Happy places. Better living.",
-  location: "Al Muntaza, Doha, Qatar",
+  location: "Ibn Seena Street 960, Zone 24, Building 146, Floor 4, Office 5, Room 3, Doha, Qatar",
   website: "Naturesbestcompany.com",
   websiteUrl: "https://naturesbestcompany.com",
-  phone: "+974 3305 0358",
-  phoneHref: "tel:+97433050358",
-  whatsapp: "+974 5079 3043",
-  whatsappUrl:
-    "https://wa.me/97450793043?text=Hello%20Nature's%20Best%20Cleaning%2C%20I'd%20like%20to%20get%20a%20quote.",
+  phone: "+974 6692 3522",
+  phoneHref: "tel:+97466923522",
+  whatsapp: "+974 33050358",
+  whatsappUrl: "https://wa.me/+97433050358",
   workingHours: "Saturday – Thursday, 7:00 AM – 9:00 PM (Friday by appointment)",
-  mapEmbed: "https://www.google.com/maps?q=Al%20Muntazah%2C%20Doha%2C%20Qatar&output=embed",
+  mapEmbed:
+    "https://www.google.com/maps?q=Ibn%20Seena%20Street%20960%2C%20Zone%2024%2C%20Building%20146%2C%20Floor%204%2C%20Office%205%2C%20Room%203%2C%20Doha%2C%20Qatar&output=embed",
   socials: [
-    { label: "Facebook", href: "#" },
-    { label: "Instagram", href: "#" },
-    { label: "YouTube", href: "#" },
-    { label: "TikTok", href: "#" },
+    { label: "Facebook", href: "https://www.facebook.com/p/Natures-Best-Cleaning-Co-100063481721783/" },
+    { label: "Instagram", href: "https://www.instagram.com/naturesbestcleaning/" },
+    { label: "YouTube", href: "https://www.youtube.com/channel/UCI1XBEBOgtTL4sMoB0inBtg/videos" },
+    { label: "TikTok", href: "https://www.tiktok.com/@naturesbestcompany?_r=1&_t=ZS-9AEDxYA26MP" },
   ],
 } as const;
 

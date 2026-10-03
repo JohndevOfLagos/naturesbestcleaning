@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUp, Bot, Check, LoaderCircle, MessageCircle, Phone, Send } from "lucide-react";
-
+import WhatsappIconIcon from "@iconify-react/logos/whatsapp-icon";
 import {
   Dialog,
   DialogContent,
@@ -80,10 +80,9 @@ export function FloatingSupport({ showTop }: { showTop: boolean }) {
   };
 
   const talkToHuman = () => {
-    const prompt = encodeURIComponent(
-      "Hello Nature's Best Cleaning, I'd like to speak with your team.",
-    );
-    window.open(`https://wa.me/97450793043?text=${prompt}`, "_blank", "noopener,noreferrer");
+    const url = new URL(company.whatsappUrl);
+    url.searchParams.set("text", "Hello Nature's Best Cleaning, I'd like to speak with your team.");
+    window.open(url.toString(), "_blank", "noopener,noreferrer");
   };
 
   const chooseQuickReply = (reply: string) => {
@@ -198,7 +197,7 @@ export function FloatingSupport({ showTop }: { showTop: boolean }) {
           aria-label="Chat with us on WhatsApp"
           className="group relative flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lift animate-soft-pulse transition-transform hover:scale-105"
         >
-          <MessageCircle className="size-6" />
+          <WhatsappIconIcon height="1.5em" />
           <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full bg-navy-deep px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
             Chat with us
           </span>
@@ -361,7 +360,7 @@ export function FloatingSupport({ showTop }: { showTop: boolean }) {
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center gap-1 text-whatsapp transition-colors hover:brightness-90"
         >
-          <MessageCircle className="size-5" />
+          <WhatsappIconIcon height="1em" />
           <span className="text-[0.65rem] font-semibold">WhatsApp</span>
         </a>
         <button
